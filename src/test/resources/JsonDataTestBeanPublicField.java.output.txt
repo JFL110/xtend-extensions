@@ -1,0 +1,56 @@
+package org.jfl110;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.jfl110.xtend.JsonData;
+import org.jfl110.xtend.JsonDataField;
+
+@JsonData
+@SuppressWarnings("all")
+public class JsonDataTestBeanOne {
+  @JsonDataField("fieldOne")
+  public final String publicField;
+  
+  @JsonCreator
+  public JsonDataTestBeanOne(@JsonProperty(value = "fieldOne") final String publicField) {
+    super();
+    this.publicField = publicField;
+  }
+  
+  @Override
+  @Pure
+  public int hashCode() {
+    return 31 * 1 + ((this.publicField== null) ? 0 : this.publicField.hashCode());
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JsonDataTestBeanOne other = (JsonDataTestBeanOne) obj;
+    if (this.publicField == null) {
+      if (other.publicField != null)
+        return false;
+    } else if (!this.publicField.equals(other.publicField))
+      return false;
+    return true;
+  }
+  
+  @Override
+  public String toString() {
+    java.lang.StringBuilder b = new java.lang.StringBuilder().append("[");
+    b = b.append("publicField=").append(this.publicField).append(" ");
+    return b.append("]").toString();
+  }
+  
+  @JsonProperty(value = "fieldOne")
+  public String getPublicField() {
+    return this.publicField;
+  }
+}

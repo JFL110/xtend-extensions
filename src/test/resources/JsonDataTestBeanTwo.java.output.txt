@@ -1,0 +1,120 @@
+package org.jfl110;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.ImmutableList;
+import java.util.List;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.jfl110.xtend.JsonData;
+import org.jfl110.xtend.JsonDataField;
+
+@JsonData
+@SuppressWarnings("all")
+public class JsonDataTestBeanOne {
+  @JsonDataField("fieldOne")
+  private final String fieldOne;
+  
+  @JsonDataField("fieldTwo")
+  private final int fieldTwo;
+  
+  private final boolean fieldThreeNoName;
+  
+  private final ImmutableList<String> unnamedList;
+  
+  @JsonDataField("namedList")
+  private final ImmutableList<String> namedList;
+  
+  public String someMethod() {
+    return (this.fieldOne + Boolean.valueOf(this.fieldThreeNoName));
+  }
+  
+  @JsonCreator
+  public JsonDataTestBeanOne(@JsonProperty(value = "fieldOne") final String fieldOne, @JsonProperty(value = "fieldTwo") final int fieldTwo, @JsonProperty(value = "fieldThreeNoName") final boolean fieldThreeNoName, @JsonProperty(value = "unnamedList") final List<String> unnamedList, @JsonProperty(value = "namedList") final List<String> namedList) {
+    super();
+    this.fieldOne = fieldOne;
+    this.fieldTwo = fieldTwo;
+    this.fieldThreeNoName = fieldThreeNoName;
+    this.unnamedList = unnamedList == null ? ImmutableList.of() : ImmutableList.copyOf(unnamedList);
+    this.namedList = namedList == null ? ImmutableList.of() : ImmutableList.copyOf(namedList);
+  }
+  
+  @Override
+  @Pure
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.fieldOne== null) ? 0 : this.fieldOne.hashCode());
+    result = prime * result + this.fieldTwo;
+    result = prime * result + (this.fieldThreeNoName ? 1231 : 1237);
+    result = prime * result + ((this.unnamedList== null) ? 0 : this.unnamedList.hashCode());
+    return prime * result + ((this.namedList== null) ? 0 : this.namedList.hashCode());
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JsonDataTestBeanOne other = (JsonDataTestBeanOne) obj;
+    if (this.fieldOne == null) {
+      if (other.fieldOne != null)
+        return false;
+    } else if (!this.fieldOne.equals(other.fieldOne))
+      return false;
+    if (other.fieldTwo != this.fieldTwo)
+      return false;
+    if (other.fieldThreeNoName != this.fieldThreeNoName)
+      return false;
+    if (this.unnamedList == null) {
+      if (other.unnamedList != null)
+        return false;
+    } else if (!this.unnamedList.equals(other.unnamedList))
+      return false;
+    if (this.namedList == null) {
+      if (other.namedList != null)
+        return false;
+    } else if (!this.namedList.equals(other.namedList))
+      return false;
+    return true;
+  }
+  
+  @Override
+  public String toString() {
+    java.lang.StringBuilder b = new java.lang.StringBuilder().append("[");
+    b = b.append("fieldOne=").append(this.fieldOne).append(" ");
+    b = b.append("fieldTwo=").append(this.fieldTwo).append(" ");
+    b = b.append("fieldThreeNoName=").append(this.fieldThreeNoName).append(" ");
+    b = b.append("unnamedList=").append(this.unnamedList).append(" ");
+    b = b.append("namedList=").append(this.namedList).append(" ");
+    return b.append("]").toString();
+  }
+  
+  @JsonProperty(value = "fieldOne")
+  public String getFieldOne() {
+    return this.fieldOne;
+  }
+  
+  @JsonProperty(value = "fieldTwo")
+  public int getFieldTwo() {
+    return this.fieldTwo;
+  }
+  
+  @JsonProperty(value = "fieldThreeNoName")
+  public boolean isFieldThreeNoName() {
+    return this.fieldThreeNoName;
+  }
+  
+  @JsonProperty(value = "unnamedList")
+  public ImmutableList<String> getUnnamedList() {
+    return this.unnamedList;
+  }
+  
+  @JsonProperty(value = "namedList")
+  public ImmutableList<String> getNamedList() {
+    return this.namedList;
+  }
+}

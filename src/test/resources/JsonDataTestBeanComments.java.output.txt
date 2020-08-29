@@ -1,0 +1,77 @@
+package org.jfl110;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.jfl110.xtend.JsonData;
+import org.jfl110.xtend.JsonDataField;
+
+@JsonData
+@SuppressWarnings("all")
+public class JsonDataTestBeanOne {
+  @JsonDataField("fieldOne")
+  private final String fieldOne;
+  
+  /**
+   * another comment on this field
+   */
+  @JsonDataField("fieldTwo")
+  private final String fieldTwo;
+  
+  @JsonCreator
+  public JsonDataTestBeanOne(@JsonProperty(value = "fieldOne") final String fieldOne, @JsonProperty(value = "fieldTwo") final String fieldTwo) {
+    super();
+    this.fieldOne = fieldOne;
+    this.fieldTwo = fieldTwo;
+  }
+  
+  @Override
+  @Pure
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.fieldOne== null) ? 0 : this.fieldOne.hashCode());
+    return prime * result + ((this.fieldTwo== null) ? 0 : this.fieldTwo.hashCode());
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JsonDataTestBeanOne other = (JsonDataTestBeanOne) obj;
+    if (this.fieldOne == null) {
+      if (other.fieldOne != null)
+        return false;
+    } else if (!this.fieldOne.equals(other.fieldOne))
+      return false;
+    if (this.fieldTwo == null) {
+      if (other.fieldTwo != null)
+        return false;
+    } else if (!this.fieldTwo.equals(other.fieldTwo))
+      return false;
+    return true;
+  }
+  
+  @Override
+  public String toString() {
+    java.lang.StringBuilder b = new java.lang.StringBuilder().append("[");
+    b = b.append("fieldOne=").append(this.fieldOne).append(" ");
+    b = b.append("fieldTwo=").append(this.fieldTwo).append(" ");
+    return b.append("]").toString();
+  }
+  
+  @JsonProperty(value = "fieldOne")
+  public String getFieldOne() {
+    return this.fieldOne;
+  }
+  
+  @JsonProperty(value = "fieldTwo")
+  public String getFieldTwo() {
+    return this.fieldTwo;
+  }
+}

@@ -1,0 +1,12 @@
+package org.jfl110
+
+import org.jfl110.xtend.JsonData
+import org.jfl110.xtend.JsonDataField
+
+@JsonData class JsonDataTestBeanOne {
+	// Comment on this field
+	@JsonDataField("fieldOne") final String fieldOne
+	
+	/* another comment on this field */
+	@JsonDataField("fieldTwo") final String fieldTwo
+}
