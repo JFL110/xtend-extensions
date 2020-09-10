@@ -36,8 +36,9 @@ with:
 ```
 @JsonData class Message {
 
- @JsonDataField("time") long time;
- @JsonDataField("time") String text;
+ @JsonDataField("time") long time
+ @JsonDataField("text") String text
 
 }
 ```
+which also handles toString, hashCode and equals, if not implemented.
